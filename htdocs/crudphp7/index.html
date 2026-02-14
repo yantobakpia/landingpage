@@ -1,0 +1,56 @@
+<head>
+  <link href="aw.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+  <style>
+    .password-toggle {
+      position: relative;
+    }
+    
+    .password-toggle input[type="password"] {
+      padding-right: 30px;
+    }
+    
+    .password-toggle .toggle-icon {
+      position: absolute;
+      top: 43%;
+      right: 5px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: white;
+    }
+  </style>
+  <script>
+    function togglePasswordVisibility() {
+      var passwordInput = document.getElementById("password-input");
+      var toggleIcon = document.getElementById("toggle-icon");
+      
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        toggleIcon.classList.remove("fa-eye");
+        toggleIcon.classList.add("fa-eye-slash");
+      } else {
+        passwordInput.type = "password";
+        toggleIcon.classList.remove("fa-eye-slash");
+        toggleIcon.classList.add("fa-eye");
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="login">
+    <h1>Hi, Admin!</h1>
+    <form action="login.php" method="POST">
+      <input type="text" name="username" placeholder="Username" required="required" />
+      <div class="password-toggle">
+        <input type="password" name="password" id="password-input" placeholder="Password" required="required" />
+        <i id="toggle-icon" class="fa fa-eye toggle-icon" onclick="togglePasswordVisibility()"></i>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block btn-large">Login</button>
+    </form>
+    <?php if (isset($login_error)) { ?>
+      <p class="error-msg"><?php echo $login_error; ?></p>
+    <?php } ?>
+  </div>
+</body>
+</html>
